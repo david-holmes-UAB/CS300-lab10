@@ -231,11 +231,11 @@ std::string pokerHand::handConversion(const std::string & hand, int (&handArr)[5
     // Conversion of 10 + face cards to numbers
     std::string hcopy = hand;
 
-    std::regex_replace(hcopy, ten, "10");
-    std::regex_replace(hcopy, jack, "11");
-    std::regex_replace(hcopy, queen, "12");
-    std::regex_replace(hcopy, king, "13");
-    std::regex_replace(hcopy, ace, "14");
+    hcopy = std::regex_replace(hcopy, std::regex("T"), "10");
+    hcopy = std::regex_replace(hcopy, std::regex("J"), "11");
+    hcopy = std::regex_replace(hcopy, std::regex("Q"), "12");
+    hcopy = std::regex_replace(hcopy, std::regex("K"), "13");
+    hcopy = std::regex_replace(hcopy, std::regex("A"), "14");
 
     // Process of isolating numbers and tokenizing, then adding 
     // to an array. Also sorts the numbers by smallest to largest.
@@ -243,10 +243,7 @@ std::string pokerHand::handConversion(const std::string & hand, int (&handArr)[5
     std::string temp = "";
     
     // In order: remove signifiers for (H)earts, (D)iamonds, (C)lubs, (S)pades
-    copy2.erase(remove(copy2.begin(), copy2.end(), 'H'));
-    copy2.erase(remove(copy2.begin(), copy2.end(), 'D'));
-    copy2.erase(remove(copy2.begin(), copy2.end(), 'C'));
-    copy2.erase(remove(copy2.begin(), copy2.end(), 'S'));
+    copy2 = std::regex_replace(copy2, std::regex("[HDCS]"), "");
 
     // Prepare to tokenize input
     std::stringstream cnv(copy2);
@@ -257,7 +254,7 @@ std::string pokerHand::handConversion(const std::string & hand, int (&handArr)[5
         handArr[i] = std::stoi(temp);
         i++;
     }
-    
+    // [0-9]|1[0-4]
     // sort array from smallest to largest
     std::sort(std::begin(handArr), std::end(handArr));
 
@@ -329,8 +326,8 @@ bool pokerHand::flush(const std::string & hand) {
 * Checks to see if the hand contains a straight
 */
 bool pokerHand::straight(int (&handArr)[5]) const {
-    for (int i = 0; i < 5; i++) {
-        // if the following card is not 
+    for (int i = 0; i < 4; i++) {
+        // if the following card is not one more than the current one
         if (!(handArr[i] == handArr[i+1] - 1)) {
             return false;
         }

@@ -1,0 +1,35 @@
+Start testing: Nov 15 13:12 CST
+----------------------------------------------------------
+1/1 Testing: testingExample
+1/1 Test: testingExample
+Command: "/mnt/d/Documents/Classes/CS300/lab10/build/testingExample"
+Directory: /mnt/d/Documents/Classes/CS300/lab10/build
+"testingExample" start time: Nov 15 13:12 CST
+Output:
+----------------------------------------------------------
+Running main() from /mnt/d/Documents/Classes/CS300/lab10/googletest/googletest/src/gtest_main.cc
+[==========] Running 4 tests from 1 test suite.
+[----------] Global test environment set-up.
+[----------] 4 tests from PokerTesting
+[ RUN      ] PokerTesting.sampleTest
+[       OK ] PokerTesting.sampleTest (11 ms)
+[ RUN      ] PokerTesting.testSFlush
+[       OK ] PokerTesting.testSFlush (14 ms)
+[ RUN      ] PokerTesting.testFullHouse
+[       OK ] PokerTesting.testFullHouse (11 ms)
+[ RUN      ] PokerTesting.testSFlushTie
+[       OK ] PokerTesting.testSFlushTie (4 ms)
+[----------] 4 tests from PokerTesting (42 ms total)
+
+[----------] Global test environment tear-down
+[==========] 4 tests from 1 test suite ran. (42 ms total)
+[  PASSED  ] 4 tests.
+<end of output>
+Test time =   0.06 sec
+----------------------------------------------------------
+Test Passed.
+"testingExample" end time: Nov 15 13:12 CST
+"testingExample" time elapsed: 00:00:00
+----------------------------------------------------------
+
+End testing: Nov 15 13:12 CST
