@@ -54,6 +54,7 @@ std::string pokerHand::bestPokerHand(std::string p1, std::string p2) {
         switch (tie)
         {
         case PAIR:
+            {
             // Variables for tiebreaker comparison
             int p1 = 0;
             int p1pos = 0;
@@ -94,10 +95,12 @@ std::string pokerHand::bestPokerHand(std::string p1, std::string p2) {
                 else { return "Tie."; }
             }
             break;
+            }
         case TWOPAIR:
             /* TODO */
             break;
         case THREEOFAKIND:
+            {
             // values of the duped cards
             int p1kind = 0;
             int p2kind = 0; 
@@ -115,7 +118,9 @@ std::string pokerHand::bestPokerHand(std::string p1, std::string p2) {
             else if (p2kind > p1kind) { return "Player 2 Wins."; }
             else { return "Tie."; }
             break;
+            }
         case STRAIGHT:
+            {
             int p1High = p1Cards[4];
             int p2High = p1Cards[4];
             // decision
@@ -123,7 +128,9 @@ std::string pokerHand::bestPokerHand(std::string p1, std::string p2) {
             else if (p2High > p1High) { return "Player 2 Wins."; }
             else { return "Tie."; }
             break;
+            }
         case FLUSH:
+            {
             // High Card Rules.
             // Keep Comparing in the sorted hands until one is larger than the other
             for (int i = 4; i > -1; i--) {
@@ -134,7 +141,9 @@ std::string pokerHand::bestPokerHand(std::string p1, std::string p2) {
             // If hands are the exact same, it's a tie.
             return "Tie.";
             break;
+            }
         case FULLHOUSE:
+            {
             // Works the same as Three of a Kind
             int p1house = 0;
             int p2house = 0; 
@@ -152,7 +161,9 @@ std::string pokerHand::bestPokerHand(std::string p1, std::string p2) {
             else if (p2house > p1house) { return "Player 2 Wins."; }
             else { return "Tie."; }
             break;
+            }
         case FOUROFAKIND:
+            {
             // values of the duped cards
             int p14kind = 0;
             int p24kind = 0; 
@@ -172,7 +183,9 @@ std::string pokerHand::bestPokerHand(std::string p1, std::string p2) {
             else if (p24kind > p14kind) { return "Player 2 Wins."; }
             else { return "Tie."; }
             break;
+            }
         case STRAIGHTFLUSH:
+            {
             int p1SFHigh = p1Cards[4];
             int p2SFHigh = p1Cards[4];
             // decision
@@ -180,7 +193,9 @@ std::string pokerHand::bestPokerHand(std::string p1, std::string p2) {
             else if (p2SFHigh > p1SFHigh) { return "Player 2 Wins."; }
             else { return "Tie."; }
             break;
+            }
         default:
+            {
         // High Card Rules.
             for (int i = 4; i > -1; i--) {
                 if (p1Cards[i] > p2Cards[i]) { return "Player 1 Wins."; }
@@ -189,6 +204,7 @@ std::string pokerHand::bestPokerHand(std::string p1, std::string p2) {
             }
             return "Tie.";
             break;
+            }
         }
 
     }
@@ -243,7 +259,7 @@ std::string pokerHand::handConversion(const std::string & hand, int (&handArr)[5
     }
     
     // sort array from smallest to largest
-    std::sort(handArr[0], handArr[4]);
+    std::sort(std::begin(handArr), std::end(handArr));
 
     return hcopy;
 }
