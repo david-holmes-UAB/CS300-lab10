@@ -25,8 +25,8 @@ int p2value;
 * Pair of arrays to hold only the numerical values of each of the five cards.
 * This array is utilized to find the highest card in each hand if necessary.
 */
-std::array<int, 5> p1Cards;
-std::array<int, 5> p2Cards;
+int p1Cards[5];
+int p2Cards[5];
 
 /*
 * Function: handConversion
@@ -35,7 +35,7 @@ std::array<int, 5> p2Cards;
         values of the cards in the hand
 * Output: a new string with ten and/or face cards converted to numbers
 */
-std::string handConversion(const std::string & hand, std::array<int, 5>& handArr);
+std::string handConversion(const std::string & hand, int (&handArr)[5]);
 
 /*
 * Function: rankHand()
@@ -43,7 +43,7 @@ std::string handConversion(const std::string & hand, std::array<int, 5>& handArr
 * Output: an int value representing the "rank" of the provided hand
 * Checks to see the highest value hand and assigns the appropriate rank.
 */
-int rankHand(const std::string & hand, std::array<int, 5> & handArr);
+int rankHand(const std::string & hand, int (&handArr)[5]);
 
 // Functions for various specific hands
 
@@ -51,10 +51,10 @@ int rankHand(const std::string & hand, std::array<int, 5> & handArr);
 // There is most likely a more consolodated way to do this check,
 // but I didn't end up thinking of it
 bool flush(const std::string & hand);               // contains a flush
-bool straight(std::array<int, 5> & handArr) const;  // contains a straight
-bool fourKind(std::array<int, 5> & handArr) const;  // contains four of a kind
-bool threeKind(std::array<int, 5> & handArr) const; // contains three of a kind    
-bool fullHouse(std::array<int, 5> & handArr) const; // contains a full house
+bool straight(int (&handArr)[5]) const;             // contains a straight
+bool fourKind(int (&handArr)[5]) const;             // contains four of a kind
+bool threeKind(int (&handArr)[5]) const;            // contains three of a kind    
+bool fullHouse(int (&handArr)[5]) const;            // contains a full house
 
 
 public:

@@ -31,7 +31,6 @@ std::regex queen ("Q");
 std::regex king ("K");
 std::regex ace ("A");
 
-
 pokerHand::pokerHand() {
     /* Constructor */
 
@@ -137,20 +136,20 @@ std::string pokerHand::bestPokerHand(std::string p1, std::string p2) {
             break;
         case FULLHOUSE:
             // Works the same as Three of a Kind
-            int p1kind = 0;
-            int p2kind = 0; 
+            int p1house = 0;
+            int p2house = 0; 
 
             for(int i = 0; i < 3; i++){
                 if(p1Cards[i] == p1Cards[i+1] && p1Cards[i] == p1Cards[i+2]) {
-                    p1kind = p1Cards[i];
+                    p1house = p1Cards[i];
                 }
                 if(p2Cards[i] == p2Cards[i+1] && p2Cards[i] == p2Cards[i+2]) {
-                    p2kind = p2Cards[i];
+                    p2house = p2Cards[i];
                 }
             }
             // Decision
-            if (p1kind > p2kind) { return "Player 1 Wins."; }
-            else if (p2kind > p1kind) { return "Player 2 Wins."; }
+            if (p1house > p2house) { return "Player 1 Wins."; }
+            else if (p2house > p1house) { return "Player 2 Wins."; }
             else { return "Tie."; }
             break;
         case FOUROFAKIND:
@@ -174,11 +173,11 @@ std::string pokerHand::bestPokerHand(std::string p1, std::string p2) {
             else { return "Tie."; }
             break;
         case STRAIGHTFLUSH:
-            int p1High = p1Cards[4];
-            int p2High = p1Cards[4];
+            int p1SFHigh = p1Cards[4];
+            int p2SFHigh = p1Cards[4];
             // decision
-            if (p1High > p2High) { return "Player 1 Wins."; }
-            else if (p2High > p1High) { return "Player 2 Wins."; }
+            if (p1SFHigh > p2SFHigh) { return "Player 1 Wins."; }
+            else if (p2SFHigh > p1SFHigh) { return "Player 2 Wins."; }
             else { return "Tie."; }
             break;
         default:
@@ -202,6 +201,7 @@ std::string pokerHand::bestPokerHand(std::string p1, std::string p2) {
     
 }
 
+
 // Private functions
 
 /*
@@ -211,7 +211,7 @@ std::string pokerHand::bestPokerHand(std::string p1, std::string p2) {
 * into numerical values for the sake of comparisons.
 * Also populates the arrays that only contain the numbers
 */
-std::string pokerHand::handConversion(const std::string & hand, std::array<int, 5>& handArr) {
+std::string pokerHand::handConversion(const std::string & hand, int (&handArr)[5]) {
     // Conversion of 10 + face cards to numbers
     std::string hcopy = hand;
 
@@ -243,7 +243,7 @@ std::string pokerHand::handConversion(const std::string & hand, std::array<int, 
     }
     
     // sort array from smallest to largest
-    std::sort(handArr.begin(), handArr.end());
+    std::sort(handArr[0], handArr[4]);
 
     return hcopy;
 }
@@ -256,7 +256,7 @@ std::string pokerHand::handConversion(const std::string & hand, std::array<int, 
 * Checks if any of the booleans are true and assigns that value. If no booleans are true, checks for any
 * pairs. If there are no pairs, assigns the hand the value of its highest card.
 */
-int pokerHand::rankHand(const std::string & hand, std::array<int, 5> & handArr) {
+int pokerHand::rankHand(const std::string & hand, int (&handArr)[5]) {
 
     // Is there a better way of performing these checks?
     if (flush(hand) && straight(handArr)) { return STRAIGHTFLUSH; }
@@ -312,7 +312,7 @@ bool pokerHand::flush(const std::string & hand) {
 * -------------------------------------
 * Checks to see if the hand contains a straight
 */
-bool pokerHand::straight(std::array<int, 5> & handArr) const {
+bool pokerHand::straight(int (&handArr)[5]) const {
     for (int i = 0; i < 5; i++) {
         // if the following card is not 
         if (!(handArr[i] == handArr[i+1] - 1)) {
@@ -330,7 +330,7 @@ bool pokerHand::straight(std::array<int, 5> & handArr) const {
 * Breaks the passed in array twice; 3 and 2, and 2 and 3, to check if one is a pair
 * and the other is a three of a kind.
 */
-bool pokerHand::fullHouse(std::array<int, 5> & handArr) const {
+bool pokerHand::fullHouse(int (&handArr)[5]) const {
     // Check front for three of a kind and back for pair
     if (handArr[0] == handArr[1] && handArr[0] == handArr[2]) {
         if (handArr[3] == handArr[4]) {
@@ -354,7 +354,7 @@ bool pokerHand::fullHouse(std::array<int, 5> & handArr) const {
 * ------------------------------------
 * Checks to see if the hand contains a four of a Kind
 */
-bool pokerHand::fourKind(std::array<int, 5> & handArr) const {
+bool pokerHand::fourKind(int (&handArr)[5]) const {
     int kind = 0;               // Counter
     /*
     * If a sorted hand is a four of a kind, then either the first or 
@@ -379,7 +379,7 @@ bool pokerHand::fourKind(std::array<int, 5> & handArr) const {
 * ---------------------------------------
 * Checks to see if the hand contains a three of a Kind
 */
-bool pokerHand::threeKind(std::array<int, 5> & handArr) const {
+bool pokerHand::threeKind(int (&handArr)[5]) const {
     int kind = 0;               // Counter
     /*
     * If a sorted hand is a three of a kind, then the first, second, or
