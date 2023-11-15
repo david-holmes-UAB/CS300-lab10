@@ -39,21 +39,26 @@ struct PokerTesting : public ::testing::Test {
     }
 };
 
+// Test for the case provided in the assignment page
 TEST_F(PokerTesting, sampleTest) {
     // Testing the sample input and output
     EXPECT_EQ(p.bestPokerHand(h1, h2), win2);
 }
 
+// Test to ensure that a Straight Flush is parsed and will win.
 TEST_F(PokerTesting, testSFlush) {
     EXPECT_EQ(p.bestPokerHand(h3, h4), win1);
     EXPECT_EQ(p.bestPokerHand(h1, h3), win2);
 }
 
+// Tests for a win with a Full House, and a loss against a Straight Flush with the
+// same hand.
 TEST_F(PokerTesting, testFullHouse) {
     EXPECT_EQ(p.bestPokerHand(h5, h2), win1);
     EXPECT_EQ(p.bestPokerHand(h3, h5), win1);
 }
 
+// Test to ensure a Straight Flush is a tie regardless of suit difference
 TEST_F(PokerTesting, testSFlushTie) {
     EXPECT_EQ(p.bestPokerHand(h3, h6), tie);
 }
