@@ -7,4 +7,4 @@ This is not a very pretty solution. In retrospect, it's probably like 100 lines 
 
 (11/14)
 I've uploaded this here as proof of my actual work, with plans to figure out how ridiculous this looks at office hours.
-Edit: this actually doesn't compile at all, which isn't great.
+Edit: this actually runs into an error while trying to convert the numbers in the string into integers
