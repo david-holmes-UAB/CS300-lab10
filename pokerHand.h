@@ -68,9 +68,6 @@ pokerHand();
 */
 std::string bestPokerHand(std::string p1, std::string p2);
 
-// debug function
-std::string tester(std::string hand);
-
 
 };
 
