@@ -202,16 +202,6 @@ std::string pokerHand::bestPokerHand(std::string p1, std::string p2) {
     
 }
 
-std::string pokerHand::tester(std::string hand) {
-    if (flush(hand)) {
-        return "True\n";
-    }
-    else {
-        return "False\n";
-    }
-}
-
-
 // Private functions
 
 /*
